@@ -1,3 +1,15 @@
+<?php
+session_start();
+require('waytab-secure/connect.php');
+
+$name = "";
+if(isset($_SESSION["user"])) {
+  $name_query = $pdo->prepare("SELECT fname, lname FROM `users` WHERE `id` = ?");
+  $name_query->execute([$_SESSION["user"]]);
+  $name = $name_query->fetch(PDO::FETCH_ASSOC);
+  $name = $name['fname'] . ' ' . $name['lname'];
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,7 +27,22 @@
       <h1>Manage</h1>
       <p class="lead">Manage is WayTab's remote management suite</p>
       <p>Manage allows us to implement features like special bell schedules.</p>
-      <p><a href="https://waytab.org" class="btn btn-primary">WayTab.org</a> <a href="signin.php" class="btn btn-primary">Sign in</a></p>
+      <?php if(isset($_SESSION["user"])) { ?><p class="lead">Welcome back, <?= $name ?></p><?php } ?>
+      <p>
+        <a href="https://waytab.org" class="btn btn-primary">WayTab.org</a> 
+        <?php
+          if(isset($_SESSION["user"])) {
+            ?>
+            <a href="manage.php" class="btn btn-primary">Manage</a> 
+            <a href="logout.php" class="ml-2">Log out</a>
+            <?php
+          } else {
+            ?>
+            <a href="signin.php" class="btn btn-primary">Sign in</a>
+            <?php
+          }
+        ?>
+      </p>
     </div>
   </body>
 </html>

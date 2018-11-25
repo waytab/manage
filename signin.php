@@ -1,3 +1,28 @@
+<?php
+
+session_start();
+
+require('waytab-secure/connect.php');
+
+$error = false;
+if(isset($_POST['email']) && isset($_POST['password'])) {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $login_query = $pdo->prepare("SELECT id FROM `users` WHERE `email` = ? AND `password` = ?");
+  $login_query->execute([$email, sha1($password)]);
+  $login_id = $login_query->fetchColumn();
+  
+  if($login_id) {
+    $_SESSION['user'] = $login_id;
+    header('location: index.php');
+  } else {
+    $error = true;
+  }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,9 +38,10 @@
     <link rel="stylesheet" href="css/signin.css">
   </head>
   <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" action="#" method="post">
       <h1 class="display-3 mb-3">Manage</h1>
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <?php if($error) { ?><p class="text-danger">Invalid Credentials</p><?php } ?>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
       <label for="inputPassword" class="sr-only">Password</label>
