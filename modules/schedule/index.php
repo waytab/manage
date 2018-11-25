@@ -22,7 +22,7 @@ if(isset($_POST['deleteSchedule'])) {
 }
 
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-
+  require('ajax.php');
 } else {
   if(isset($_SESSION['user'])) {
   ?>
@@ -41,7 +41,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     <body>
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand mb-0 h1" href="manage.php">Manage</a>
+          <a class="navbar-brand mb-0 h1" href="../../manage.php">Manage</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#manageNavbar" aria-controls="manageNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

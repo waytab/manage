@@ -33,7 +33,7 @@ if(isset($_SESSION['user'])) {
     </nav>
 
     <div class="container mt-3 mt-md-4">
-      <a href="https://github.org/WayTab" class="h4">WayTab on GitHub</a><br>
+      <a href="https://github.com/WayTab" class="h4">WayTab on GitHub</a><br>
       <a href="modules/schedule" class="h4">Manage special schedules</a>
     </div>
 
