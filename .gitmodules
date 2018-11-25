@@ -1,0 +1,3 @@
+[submodule "waytab-secure"]
+	path = waytab-secure
+	url = https://github.com/andrewward2001/waytab-secure.git
