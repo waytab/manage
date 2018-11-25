@@ -84,7 +84,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
           foreach($get_schedule as $schedule) {
             ?>
               <h4><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
-                <form method="post"><button class="text-danger ml-3 h6" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
+                <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
               </h4>
               <table class="table">
                 <thead>
