@@ -18,7 +18,7 @@ echo '{';
         echo '"name":"' . $period['name'] . '",';
         echo '"start":"' . $period['start'] . '",';
         echo '"end":"' . $period['end'] . '"';
-      echo '}';
+      echo '},';
     }
   echo ']';
 echo '}';
