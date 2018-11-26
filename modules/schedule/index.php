@@ -21,7 +21,7 @@ if(isset($_POST['deleteSchedule'])) {
   $delete_schedule->execute([$_POST['id']]);
 }
 
-if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')) {
   require('ajax.php');
 } else {
   if(isset($_SESSION['user'])) {
@@ -36,7 +36,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-      <title>Manage</title>
+      <title>Schedules - Manage</title>
     </head>
     <body>
       <nav class="navbar navbar-expand-md navbar-light bg-light">
