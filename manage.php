@@ -24,9 +24,10 @@ if(isset($_SESSION['user'])) {
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="manageNavbar">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="modules/schedule">Schedule</a>
+          <div class="navbar-nav w-100">
+            <a class="nav-item nav-link" href="#">Home</a>
+            <a class="nav-item nav-link" href="modules/schedule">Schedule <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link ml-auto" href="logout.php">Log out</a>
           </div>
         </div>
       </div>

@@ -46,9 +46,10 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="manageNavbar">
-            <div class="navbar-nav">
+            <div class="navbar-nav w-100">
               <a class="nav-item nav-link" href="../../manage.php">Home</a>
               <a class="nav-item nav-link active" href="#">Schedule <span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link ml-auto" href="../../logout.php">Log out</a>
             </div>
           </div>
         </div>
@@ -80,7 +81,6 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
         <h3 class="display-4 mt-5">Upcoming Special Schedules</h3>
         <?php
           $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` >= UNIX_TIMESTAMP()');
-          //$schudule = $get_schedule->fetch(PDO::FETCH_ASSOC);
           foreach($get_schedule as $schedule) {
             ?>
               <h4><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
