@@ -34,8 +34,29 @@ if(isset($_SESSION['user'])) {
     </nav>
 
     <div class="container mt-3 mt-md-4">
-      <a href="https://github.com/WayTab" class="h4">WayTab on GitHub</a><br>
-      <a href="modules/schedule" class="h4">Manage special schedules</a>
+      <div class="card card-body">
+        <h4 class="card-title">Special Schedules</h4>
+        <?php
+          $get_schedule = $pdo->prepare('SELECT * FROM `schedules` WHERE `date` >= ? ORDER BY `date` ASC LIMIT 1');
+          $get_schedule->execute([time()]);
+          $schedule = $get_schedule->fetch(PDO::FETCH_ASSOC);
+
+          if($schedule) {
+            ?>
+            <p class="lead">Next special schedule: <strong><?= $schedule['name'] ?></strong> on <strong><?= date('m/d/Y', $schedule['date']) ?></strong></p>
+            <?php
+          } else {
+            ?>
+            <p class="lead">There are no upcoming special schedules.</p>
+            <?php
+          }
+        ?>
+        <a href="modules/schedule" class="card-link">Manage Special Schedules</a>
+      </div>
+      <h4 class="mt-5">Important links:</h4>
+      <a href="https://waytab.org" class="h5">WayTab.org</a><br>
+      <a href="https://github.com/WayTab" class="h5">WayTab on GitHub</a><br>
+      <a href="https://andrewward2001.com/phpmyadmin" class="h5">Database (for Manage)</a><br>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
