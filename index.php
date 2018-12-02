@@ -39,6 +39,13 @@ if(isset($_SESSION["user"])) {
           } else {
             ?>
             <a href="signin.php" class="btn btn-primary">Sign in</a>
+            <?php 
+            if(isset($_GET['forbidden']) && $_GET['forbidden'] == 1) {
+              ?>
+              <span class="ml-2 text-danger">You must be signed in to do that!</span>
+              <?php
+            }
+            ?>
             <?php
           }
         ?>

@@ -164,5 +164,5 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
     </body>
   </html>
   <?php 
-  } else { header('location:../../index.php'); }
+  } else { header('location:../../index.php?forbidden=1'); }
 } ?>
