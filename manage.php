@@ -25,7 +25,7 @@ if(isset($_SESSION['user'])) {
         </button>
         <div class="collapse navbar-collapse" id="manageNavbar">
           <div class="navbar-nav w-100">
-            <a class="nav-item nav-link" href="#">Home</a>
+            <a class="nav-item nav-link active" href="#">Home</a>
             <a class="nav-item nav-link" href="modules/schedule">Schedule <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link ml-auto" href="logout.php">Log out</a>
           </div>
@@ -64,4 +64,4 @@ if(isset($_SESSION['user'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
 </html>
-<?php } ?>
+<?php } else { header('location:index.php'); } ?>
