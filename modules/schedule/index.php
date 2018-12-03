@@ -114,6 +114,43 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
             <?php
           }
         ?>
+
+        <h3 class="display-4 mt-5">Past Special Schedules</h3>
+        <?php
+          $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` < UNIX_TIMESTAMP()');
+          foreach($get_schedule as $schedule) {
+            ?>
+              <h4><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
+                <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
+              </h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Period</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
+                    $get_periods->execute([$schedule['id']]);
+
+                    foreach($get_periods as $period) {
+                      ?>
+                      <tr>
+                        <td><?= $period['name'] ?></td>
+                        <td><?= $period['start'] ?></td>
+                        <td><?= $period['end'] ?></td>
+                      </tr>
+                      <?php
+                    }
+                  ?>
+                </tbody>
+              </table>
+            <?php
+          }
+        ?>
       </div>
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
