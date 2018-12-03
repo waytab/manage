@@ -11,7 +11,8 @@ $get_periods->execute([$schedule['id']]);
 
 echo '{';
    echo '"name":"' . $schedule['name'] . '",';
-   echo '"date":"' . $schedule['date'] . '",';
+   echo '"date":"' . date('Y-m-d', $schedule['date']) . '",';
+   echo '"timestamp":"' . $schedule['date'] . '",';
    echo '"schedule":[';
     foreach($get_periods as $period) {
       echo '{';
