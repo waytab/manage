@@ -83,34 +83,36 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
           $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` >= UNIX_TIMESTAMP()');
           foreach($get_schedule as $schedule) {
             ?>
-              <h4><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
-                <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
-              </h4>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Period</th>
-                    <th scope="col">Start</th>
-                    <th scope="col">End</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
-                    $get_periods->execute([$schedule['id']]);
+              <div class="card mb-3">
+                <h4 class="m-3"><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
+                  <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
+                </h4>
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Period</th>
+                      <th scope="col">Start</th>
+                      <th scope="col">End</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
+                      $get_periods->execute([$schedule['id']]);
 
-                    foreach($get_periods as $period) {
-                      ?>
-                      <tr>
-                        <td><?= $period['name'] ?></td>
-                        <td><?= $period['start'] ?></td>
-                        <td><?= $period['end'] ?></td>
-                      </tr>
-                      <?php
-                    }
-                  ?>
-                </tbody>
-              </table>
+                      foreach($get_periods as $period) {
+                        ?>
+                        <tr>
+                          <td><?= $period['name'] ?></td>
+                          <td><?= $period['start'] ?></td>
+                          <td><?= $period['end'] ?></td>
+                        </tr>
+                        <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             <?php
           }
         ?>
@@ -120,34 +122,36 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
           $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` < UNIX_TIMESTAMP()');
           foreach($get_schedule as $schedule) {
             ?>
-              <h4><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
-                <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
-              </h4>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Period</th>
-                    <th scope="col">Start</th>
-                    <th scope="col">End</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
-                    $get_periods->execute([$schedule['id']]);
+              <div class="card mb-3">
+                <h4 class="m-3"><?= $schedule['name'] ?> on <?= date('m/d/Y', $schedule['date']) ?>
+                  <form method="post" class="d-inline-block"><button class="ml-3 btn btn-sm btn-danger" name="deleteSchedule">Delete</button><input type="hidden" value="<?= $schedule['id'] ?>" name="id"></form>
+                </h4>
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col">Period</th>
+                      <th scope="col">Start</th>
+                      <th scope="col">End</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
+                      $get_periods->execute([$schedule['id']]);
 
-                    foreach($get_periods as $period) {
-                      ?>
-                      <tr>
-                        <td><?= $period['name'] ?></td>
-                        <td><?= $period['start'] ?></td>
-                        <td><?= $period['end'] ?></td>
-                      </tr>
-                      <?php
-                    }
-                  ?>
-                </tbody>
-              </table>
+                      foreach($get_periods as $period) {
+                        ?>
+                        <tr>
+                          <td><?= $period['name'] ?></td>
+                          <td><?= $period['start'] ?></td>
+                          <td><?= $period['end'] ?></td>
+                        </tr>
+                        <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             <?php
           }
         ?>
