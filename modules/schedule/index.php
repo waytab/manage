@@ -80,7 +80,7 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
 
         <h3 class="display-4 mt-5">Upcoming Special Schedules</h3>
         <?php
-          $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` >= UNIX_TIMESTAMP()');
+          $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` >= UNIX_TIMESTAMP() ORDER BY `date`');
           foreach($get_schedule as $schedule) {
             ?>
               <div class="card mb-3">
@@ -119,7 +119,7 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
 
         <h3 class="display-4 mt-5">Past Special Schedules</h3>
         <?php
-          $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` < UNIX_TIMESTAMP()');
+          $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` < UNIX_TIMESTAMP() ORDER BY `date` DESC');
           foreach($get_schedule as $schedule) {
             ?>
               <div class="card mb-3">
