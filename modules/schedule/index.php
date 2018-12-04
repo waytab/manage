@@ -10,8 +10,8 @@ if(isset($_POST['new_schedule'])) {
   $new_schedule->execute([$_POST['name'], $date]);
   $new_schedule_id = $pdo->lastInsertId();
 
+  $new_item = $pdo->prepare("INSERT INTO `schedule_periods` (`name`, `start`, `end`, `schedule`) VALUES (?, ?, ?, ?)");
   foreach($items as $item) {
-    $new_item = $pdo->prepare("INSERT INTO `schedule_periods` (`name`, `start`, `end`, `schedule`) VALUES (?, ?, ?, ?)");
     $new_item->execute([$item[0], $item[1], $item[2], $new_schedule_id]);
   }
 }
@@ -81,6 +81,7 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
         <h3 class="display-4 mt-5">Upcoming Special Schedules</h3>
         <?php
           $get_schedule = $pdo->query('SELECT * FROM `schedules` WHERE `date` >= UNIX_TIMESTAMP() ORDER BY `date`');
+          $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
           foreach($get_schedule as $schedule) {
             ?>
               <div class="card mb-3">
@@ -97,7 +98,6 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
                   </thead>
                   <tbody>
                     <?php
-                      $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
                       $get_periods->execute([$schedule['id']]);
 
                       foreach($get_periods as $period) {
@@ -136,7 +136,6 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
                   </thead>
                   <tbody>
                     <?php
-                      $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
                       $get_periods->execute([$schedule['id']]);
 
                       foreach($get_periods as $period) {
