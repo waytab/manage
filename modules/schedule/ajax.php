@@ -13,13 +13,6 @@ echo '{';
    echo '"name":"' . $schedule['name'] . '",';
    echo '"date":"' . date('Y-m-d', $schedule['date']) . '",';
    echo '"timestamp":"' . $schedule['date'] . '",';
-   echo '"schedule":[';
-    foreach($get_periods as $period) {
-      echo '{';
-        echo '"name":"' . $period['name'] . '",';
-        echo '"start":"' . $period['start'] . '",';
-        echo '"end":"' . $period['end'] . '"';
-      echo '},';
-    }
-  echo ']';
+   echo '"schedule":';
+    echo json_encode($get_periods->fetchAll(PDO::FETCH_ASSOC));
 echo '}';
