@@ -10,9 +10,9 @@ if(isset($_POST['new_schedule'])) {
   $new_schedule->execute([$_POST['name'], $date]);
   $new_schedule_id = $pdo->lastInsertId();
 
-  $new_item = $pdo->prepare("INSERT INTO `schedule_periods` (`name`, `start`, `end`, `length`, `schedule`) VALUES (?, ?, ?, ?, ?)");
+  $new_item = $pdo->prepare("INSERT INTO `schedule_periods` (`name`, `start`, `end`, `schedule`) VALUES (?, ?, ?, ?)");
   foreach($items as $item) {
-    $new_item->execute([$item[0], $item[1], $item[2], $item[3], $new_schedule_id]);
+    $new_item->execute([$item[0], $item[1], $item[2], $new_schedule_id]);
   }
 }
 
@@ -193,15 +193,6 @@ if(isset($_GET['timestamp']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && st
                     type: 'text',
                     name: `item[${thisNum}][]`,
                     placeholder: 'End',
-                    class: 'form-control',
-                  })
-                )
-              ).append(
-                $('<div></div>').addClass('col').append(
-                  $('<input>').attr({
-                    type: 'text',
-                    name: `item[${thisNum}][]`,
-                    placeholder: 'Length',
                     class: 'form-control',
                   })
                 )

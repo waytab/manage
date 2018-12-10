@@ -7,14 +7,12 @@ $get_schedule->execute([$_GET['timestamp'], $_GET['timestamp']+86400]);
 $schedule = $get_schedule->fetch(PDO::FETCH_ASSOC);
 
 $get_periods = $pdo->prepare('SELECT * FROM `schedule_periods` WHERE `schedule` = ?');
-$get_periods->execute([$schedule['id']]);
+$get_periods->execute([$schedule['id']+86400]);
 
 echo '{';
-  if($schedule) {
-    echo '"name":"' . $schedule['name'] . '",';
-    echo '"date":"' . date('Y-m-d', $schedule['date']) . '",';
-    echo '"timestamp":"' . $schedule['date'] . '",';
-    echo '"schedule":';
+   echo '"name":"' . $schedule['name'] . '",';
+   echo '"date":"' . date('Y-m-d', $schedule['date']) . '",';
+   echo '"timestamp":"' . $schedule['date'] . '",';
+   echo '"schedule":';
     echo json_encode($get_periods->fetchAll(PDO::FETCH_ASSOC));
-  }
 echo '}';
