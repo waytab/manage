@@ -9,12 +9,23 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $login_query = $pdo->prepare("SELECT id FROM `users` WHERE `email` = ? AND `password` = ?");
-  $login_query->execute([$email, sha1($password)]);
-  $login_id = $login_query->fetchColumn();
+  $login_query = $pdo->prepare("SELECT * FROM `users` WHERE `email` = ? AND (`password` = ? OR `password-sha512` = ?)");
+  $login_query->execute([$email, sha1($password), hash('sha512', $password)]);
+  $user_row = $login_query->fetch(PDO::FETCH_ASSOC);
+
+  $login_id = $user_row['id'];
   
   if($login_id) {
     $_SESSION['user'] = $login_id;
+
+    if($user_row['password-sha512']) {
+      $del_sha1_query = $pdo->query("UPDATE `users` SET `password` = '' WHERE `id` = $login_id");
+    } else {
+      $sha_pw_query = $pdo->prepare("UPDATE `users` SET `password-sha512` = ? WHERE `id` = ?");
+      $sha_pw_query->execute([hash('sha512', $password), $login_id]);
+      $del_sha1_query = $pdo->query("UPDATE `users` SET `password` = '' WHERE `id` = $login_id");
+    }
+
     header('location: index.php');
   } else {
     $error = true;
