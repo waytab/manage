@@ -9,8 +9,8 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $login_query = $pdo->prepare("SELECT * FROM `users` WHERE `email` = ? AND (`password` = ? OR `password-sha512` = ?)");
-  $login_query->execute([$email, sha1($password), hash('sha512', $password)]);
+  $login_query = $pdo->prepare("SELECT * FROM `users` WHERE (`email` = ? OR `login` = ?) AND (`password` = ? OR `password-sha512` = ?)");
+  $login_query->execute([$email, $email, sha1($password), hash('sha512', $password)]);
   $user_row = $login_query->fetch(PDO::FETCH_ASSOC);
 
   $login_id = $user_row['id'];
@@ -53,8 +53,8 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
       <h1 class="display-3 mb-3">Manage</h1>
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <?php if($error) { ?><p class="text-danger">Invalid Credentials</p><?php } ?>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
+      <label for="inputEmail" class="sr-only">Email address or usename</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Email address or Username" required="" autofocus="" name="email">
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
