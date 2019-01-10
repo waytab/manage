@@ -26,6 +26,7 @@ if(isset($_POST['password'])) {
         <div class="collapse navbar-collapse" id="manageNavbar">
           <div class="navbar-nav w-100">
             <a class="nav-item nav-link" href="../../manage.php">Home</a>
+            <a class="nav-item nav-link" href="../announcements">Announcements</a>
             <a class="nav-item nav-link" href="../schedule">Schedule</a>
             <a class="nav-item nav-link active" href="#">Password <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link ml-auto" href="../../logout.php">Log out</a>
