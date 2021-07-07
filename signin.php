@@ -9,8 +9,8 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $login_query = $pdo->prepare("SELECT * FROM `users` WHERE (`email` = ? OR `login` = ?) AND (`password` = ? OR `password-sha512` = ?)");
-  $login_query->execute([$email, $email, sha1($password), hash('sha512', $password)]);
+  $login_query = $pdo->prepare("SELECT * FROM `users` WHERE (`email` = ? OR `login` = ?) AND `password-sha512` = ?");
+  $login_query->execute([$email, $email, hash('sha512', $password)]);
   $user_row = $login_query->fetch(PDO::FETCH_ASSOC);
 
   $login_id = $user_row['id'];
