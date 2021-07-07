@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../../waytab-secure/connect.php');
+require('../../util/db.php');
 
 if(isset($_POST['new_announcement']) && isset($_POST['announcement'])) {
   $createAnnouncement = $pdo->prepare("INSERT INTO `announcements` (`title`, `text`) VALUES (?, ?)");

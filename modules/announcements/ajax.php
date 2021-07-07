@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-require('../../waytab-secure/connect.php');
+require('../../util/db.php');
 
 $get_announcement = $pdo->query('SELECT * FROM `announcements`');
 

@@ -2,7 +2,7 @@
 
 session_start();
 
-require('waytab-secure/connect.php');
+require('util/db.php');
 
 $error = false;
 if(isset($_POST['email']) && isset($_POST['password'])) {

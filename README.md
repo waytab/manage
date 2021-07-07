@@ -12,17 +12,22 @@ You'll also need to set up the database and a user
 $ vagrant ssh
 
 # boot up a mysql prompt (the server is already running)
-$ sudo mysql -u root 
+$ sudo mysql
 
 
 mysql> CREATE DATABASE waytab;  
 mysql> USE waytab;  
 mysql> source /vagrant/waytab.sql  
-mysql> INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `login`, `password`, `password-sha512`) VALUES (NULL, 'Test', 'User', 'user@test.com', '', '', 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86');  
+mysql> CREATE USER waytab
+mysql> GRANT ALL ON waytab.* TO 'waytab'@'%'
+# verify privileges
+mysql> SHOW GRANTS FOR waytab
+# create a user so we can log into manage
+mysql> INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `login`, `password`, `password-sha512`) VALUES (NULL, 'Test', 'User', 'user@test.com', 'testuser', '', 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86');  
 mysql> exit  
 ```
 
-You'll be able to log in to Manage using `user@test.com` and `password`
+You'll be able to log in to Manage using `user@test.com` or `testuser` and `password`
 
 ### Access your dev server in your browser
 http://localhost:8080/

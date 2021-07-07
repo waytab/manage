@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('waytab-secure/connect.php');
+require('util/db.php');
 
 $name = "";
 if(isset($_SESSION["user"])) {

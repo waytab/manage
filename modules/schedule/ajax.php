@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-require('../../waytab-secure/connect.php');
+require('../../util/db.php');
 
 $get_schedule = $pdo->prepare('SELECT * FROM `schedules` WHERE `date` >= ? AND `date` <= ? ORDER BY `date` ASC LIMIT 1');
 $get_schedule->execute([$_GET['timestamp'], $_GET['timestamp']+86400]);

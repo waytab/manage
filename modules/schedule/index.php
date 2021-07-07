@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../../waytab-secure/connect.php');
+require('../../util/db.php');
 
 if(isset($_POST['new_schedule'])) {
   $items = $_POST['item'];
