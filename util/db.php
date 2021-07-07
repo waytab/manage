@@ -4,7 +4,7 @@
 // during local development. it's a private repo that exists only on the
 // server. so, if we can't find it (local dev environment), let's go ahead
 // and connect to vagrant's root user.
-if(file_exists('../waytab-secure/connect.php')) {
+if(file_exists(dirname(__DIR__, 1).'/waytab-secure/connect.php')) {
   require '../waytab-secure/connect.php';
 } else {
   $host = 'localhost';
