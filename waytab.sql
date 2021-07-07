@@ -32,7 +32,7 @@ CREATE TABLE `announcements` (
   `id` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `text` varchar(8192) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,7 @@ CREATE TABLE `schedules` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `date` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE `schedule_periods` (
   `start` time NOT NULL,
   `end` time NOT NULL,
   `schedule` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -74,7 +74,7 @@ CREATE TABLE `users` (
   `login` varchar(255) NOT NULL COMMENT 'username, alt to email',
   `password` varchar(1024) NOT NULL COMMENT 'sha1 password, no longer used',
   `password-sha512` varchar(1024) NOT NULL COMMENT 'sha512 password'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Indexes for dumped tables
